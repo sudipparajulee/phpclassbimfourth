@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['loginuser']) || $_SESSION['loginuser'] != 'isloggedin')
+{
+    header('location:login.php');
+}
 $con = mysqli_connect("localhost","root","","BIMDatabase");
 if($con === false){
     die("Error on Connection " . mysqli_connect_error());
@@ -43,6 +48,9 @@ if(!$result = mysqli_query($con,$qry)){
         </style>
     </head>
     <body>
+
+    <h1>Hello <?php echo $_SESSION['user']; ?></h1>
+
         <form action="" method="POST">
             <input type="text" name="name" placeholder="Enter Name">
             <input type="text" name="phone" placeholder="Enter Phone">
@@ -62,6 +70,7 @@ if(!$result = mysqli_query($con,$qry)){
                 <p>Phone: <?php echo $row['phone']; ?></p>
                 <p>Address: <?php echo $row['address']; ?></p>
                 <p>Email: <?php echo $row['email']; ?></p>
+                <a href="deletedata.php?userid=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure to delete?');">Delete</a>
             </div>
 
             <?php
