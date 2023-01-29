@@ -50,6 +50,7 @@ if(!$result = mysqli_query($con,$qry)){
     <body>
 
     <h1>Hello <?php echo $_SESSION['user']; ?></h1>
+    <a href="logout.php">Logout</a>
 
         <form action="" method="POST">
             <input type="text" name="name" placeholder="Enter Name">
